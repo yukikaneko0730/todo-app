@@ -1,4 +1,3 @@
-// App.jsx
 import { useState, useEffect } from "react";
 import { Switch } from "@headlessui/react";
 import SheetCard from "./components/SheetCard";
@@ -10,20 +9,58 @@ const defaultSheets = [
     id: "1",
     title: "Yoga Routine",
     subtitle: "Morning Flow ☀️",
+    memo: "",
     color: "#A3B18A",
     tasks: [
-      { id: "t1", title: "Breathwork", completed: false, date: "2025-06-01" },
-      { id: "t2", title: "Sun Salutation", completed: false, date: "2025-06-02" },
+      {
+        id: "t1",
+        title: "Breathwork",
+        completed: false,
+        date: "2025-06-01",
+        end: "2025-06-01",
+        category: "General",
+        subtasks: [],
+        memo: "",
+      },
+      {
+        id: "t2",
+        title: "Sun Salutation",
+        completed: false,
+        date: "2025-06-02",
+        end: "2025-06-02",
+        category: "General",
+        subtasks: [],
+        memo: "",
+      },
     ],
   },
   {
     id: "2",
     title: "Trip Planning",
     subtitle: "Weekend Getaway",
+    memo: "",
     color: "#C86B48",
     tasks: [
-      { id: "t3", title: "Book hotel", completed: true, date: "2025-06-04" },
-      { id: "t4", title: "Pack luggage", completed: false, date: "2025-06-05" },
+      {
+        id: "t3",
+        title: "Book hotel",
+        completed: true,
+        date: "2025-06-04",
+        end: "2025-06-04",
+        category: "General",
+        subtasks: [],
+        memo: "",
+      },
+      {
+        id: "t4",
+        title: "Pack luggage",
+        completed: false,
+        date: "2025-06-05",
+        end: "2025-06-05",
+        category: "General",
+        subtasks: [],
+        memo: "",
+      },
     ],
   },
 ];
@@ -33,7 +70,10 @@ export default function TodoApp() {
     const saved = localStorage.getItem("sheets");
     return saved ? JSON.parse(saved) : defaultSheets;
   });
-  const [selectedSheetIds, setSelectedSheetIds] = useState([]);
+
+  const [selectedSheetIds, setSelectedSheetIds] = useState(() =>
+    sheets.length > 0 ? [sheets[0].id] : []
+  );
   const [darkMode, setDarkMode] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
 
@@ -60,7 +100,46 @@ export default function TodoApp() {
     setSelectedSheetIds((ids) => ids.filter((id) => id !== sheetId));
   };
 
-  const selectedSheets = sheets.filter((s) => selectedSheetIds.includes(s.id));
+  const handleUpdateTitle = (sheetId, newTitle) => {
+    setSheets((prev) =>
+      prev.map((s) => (s.id === sheetId ? { ...s, title: newTitle } : s))
+    );
+  };
+
+  const handleUpdateSubtitle = (sheetId, newSubtitle) => {
+    setSheets((prev) =>
+      prev.map((s) => (s.id === sheetId ? { ...s, subtitle: newSubtitle } : s))
+    );
+  };
+
+  const handleDeleteTask = (sheetId, taskId) => {
+    setSheets((prev) =>
+      prev.map((s) =>
+        s.id === sheetId
+          ? { ...s, tasks: s.tasks.filter((t) => t.id !== taskId) }
+          : s
+      )
+    );
+  };
+
+  const handleToggleTask = (sheetId, taskId) => {
+    setSheets((prev) =>
+      prev.map((s) =>
+        s.id === sheetId
+          ? {
+              ...s,
+              tasks: s.tasks.map((t) =>
+                t.id === taskId ? { ...t, completed: !t.completed } : t
+              ),
+            }
+          : s
+      )
+    );
+  };
+
+  const selectedSheets = sheets.filter((s) =>
+    selectedSheetIds.includes(s.id)
+  );
 
   return (
     <div className="min-h-screen px-4 py-10 font-raleway bg-[#F9F5F0] text-[#4E4035] dark:bg-[#4E4035] dark:text-[#EFE7DD]">
@@ -83,14 +162,18 @@ export default function TodoApp() {
           <SheetCard
             key={sheet.id}
             sheet={sheet}
-            onSelect={() => {
+            onSelect={() =>
               setSelectedSheetIds((prev) =>
                 prev.includes(sheet.id)
                   ? prev.filter((id) => id !== sheet.id)
                   : [...prev, sheet.id]
-              );
-            }}
+              )
+            }
             onDelete={() => handleDeleteSheet(sheet.id)}
+            onUpdateTitle={handleUpdateTitle}
+            onUpdateSubtitle={handleUpdateSubtitle}
+            onDeleteTask={handleDeleteTask}
+            onToggleTask={handleToggleTask}
           />
         ))}
       </div>
@@ -117,12 +200,12 @@ export default function TodoApp() {
             onChange={setDarkMode}
             className={`${
               darkMode ? "bg-[#8B6F4E]" : "bg-[#EFE7DD]"
-            } relative inline-flex h-6 w-11 items-center rounded-full`}
+            } relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300`}
           >
             <span
-              className={`$${
+              className={`${
                 darkMode ? "translate-x-6" : "translate-x-1"
-              } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+              } inline-block h-4 w-4 transform rounded-full bg-white transition duration-300`}
             />
           </Switch>
         </Switch.Group>

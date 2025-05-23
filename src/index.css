@@ -12,3 +12,32 @@ body {
 h1, h2, h3 {
   font-family: 'Cormorant Garamond', serif;
 }
+
+/* FullCalendar base style override */
+.fc {
+  background-color: transparent;
+}
+
+/* ダークモード対応 */
+.dark .fc {
+  background-color: transparent;
+  color: #EFE7DD;
+}
+
+.dark .fc-daygrid-day-number,
+.dark .fc-col-header-cell,
+.dark .fc-toolbar-title {
+  color: #EFE7DD !important;
+}
+
+.dark .fc-daygrid-event {
+  background-color: #A3B18A !important;
+  border: none !important;
+  color: #4E4035 !important;
+}
+
+.dark .fc-button {
+  background-color: #8B6F4E;
+  border: none;
+  color: white;
+}

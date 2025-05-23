@@ -13,20 +13,26 @@ export default function SheetCard({
   const [isEditing, setIsEditing] = useState(false);
   const [titleInput, setTitleInput] = useState(sheet.title);
   const [subtitleInput, setSubtitleInput] = useState(sheet.subtitle);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSave = (e) => {
     e.stopPropagation();
-    onUpdateTitle(titleInput);
-    onUpdateSubtitle(subtitleInput);
+    onUpdateTitle(sheet.id, titleInput);
+    onUpdateSubtitle(sheet.id, subtitleInput);
     setIsEditing(false);
+  };
+
+  const toggleOpen = (e) => {
+    e.stopPropagation();
+    setIsOpen((prev) => !prev);
   };
 
   return (
     <div
-      className="bg-white p-4 rounded-2xl shadow-md w-72 hover:shadow-lg transition relative"
+      className="bg-white dark:bg-[#6C584C] p-4 rounded-2xl shadow-md w-72 hover:shadow-lg transition relative"
       style={{ borderTop: `6px solid ${sheet.color}` }}
-      onClick={() => onSelect(sheet.id)}
     >
+      {/* タイトル・編集UI */}
       <div className="flex justify-between items-start mb-2">
         <div className="w-full">
           {isEditing ? (
@@ -34,12 +40,12 @@ export default function SheetCard({
               <input
                 value={titleInput}
                 onChange={(e) => setTitleInput(e.target.value)}
-                className="font-cormorant text-lg font-bold w-full mb-1 border-b"
+                className="font-cormorant text-lg font-bold w-full mb-1 border-b bg-transparent"
               />
               <input
                 value={subtitleInput}
                 onChange={(e) => setSubtitleInput(e.target.value)}
-                className="text-sm w-full border-b"
+                className="text-sm w-full border-b bg-transparent"
               />
             </>
           ) : (
@@ -51,6 +57,7 @@ export default function SheetCard({
             </>
           )}
         </div>
+
         <div className="flex gap-2 ml-2">
           {isEditing ? (
             <button
@@ -75,7 +82,7 @@ export default function SheetCard({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onDelete();
+              onDelete(sheet.id);
             }}
             className="text-[#A15C58] hover:text-red-600"
             title="Delete Sheet"
@@ -85,46 +92,47 @@ export default function SheetCard({
         </div>
       </div>
 
-      <ul className="mt-2 space-y-1">
-        {sheet.tasks.slice(0, 4).map((task) => (
-          <li
-            key={task.id}
-            className="flex items-center justify-between bg-[#EFE7DD] rounded px-2 py-1 text-sm"
-          >
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                onToggleTask(task.id);
-              }}
-              className={`flex-1 cursor-pointer ${
-                task.completed ? "line-through text-gray-400" : ""
-              }`}
+      {/* タスク一覧 */}
+      {isOpen && (
+        <ul className="mt-2 space-y-1">
+          {sheet.tasks.map((task) => (
+            <li
+              key={task.id}
+              className="flex items-center justify-between bg-[#EFE7DD] dark:bg-[#8B6F4E] rounded px-2 py-1 text-sm"
             >
-              {task.title}
-            </span>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onDeleteTask(task.id);
-              }}
-              className="text-[#A15C58] hover:text-red-600 ml-2"
-              title="Delete Task"
-            >
-              <Trash2 size={14} />
-            </button>
-          </li>
-        ))}
-      </ul>
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleTask(sheet.id, task.id);
+                }}
+                className={`flex-1 cursor-pointer ${
+                  task.completed ? "line-through text-gray-400" : ""
+                }`}
+              >
+                {task.title}
+              </span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDeleteTask(sheet.id, task.id);
+                }}
+                className="text-[#A15C58] hover:text-red-600 ml-2"
+                title="Delete Task"
+              >
+                <Trash2 size={14} />
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
+      {/* View / Close ボタン */}
       <div className="text-center mt-4">
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelect(sheet.id);
-          }}
+          onClick={toggleOpen}
           className="text-sm text-[#8B6F4E] hover:underline"
         >
-          View Tasks →
+          {isOpen ? "Close" : "View Tasks →"}
         </button>
       </div>
     </div>

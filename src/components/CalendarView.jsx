@@ -1,3 +1,4 @@
+//CalendarView.jsx
 import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import TaskItem from "./TaskItem";
@@ -7,6 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import { v4 as uuidv4 } from "uuid";
 
+
 export default function CalendarView({ sheets, onUpdateSheet }) {
   const [input, setInput] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -15,6 +17,7 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
 
   const addTask = () => {
     if (!input.trim() || !sheets[0]) return;
+  
     const newTask = {
       id: uuidv4(),
       title: input,
@@ -22,17 +25,21 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
       date: startDate,
       end: endDate || startDate,
       completed: false,
+      subtasks: [],       // ← 追加
+      memo: "",           // ← 追加
     };
+  
     const updatedSheet = {
       ...sheets[0],
       tasks: [newTask, ...sheets[0].tasks],
     };
+  
     onUpdateSheet(updatedSheet);
     setInput("");
     setStartDate("");
     setEndDate("");
   };
-
+  
   const toggleTask = (sheetId, taskId) => {
     const sheet = sheets.find((s) => s.id === sheetId);
     const updatedSheet = {

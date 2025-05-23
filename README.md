@@ -22,3 +22,4 @@ My Lovely ToDo is a beautifully designed productivity app that combines intuitiv
 🎯 Ideal For
 People who love thoughtful UX, visual clarity, and a planner that feels both personal and powerful. Whether you’re organizing a yoga routine, planning a trip, or managing your week, this app helps you stay calm and on track.
 
+npm run dev
