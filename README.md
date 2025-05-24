@@ -1,30 +1,56 @@
-# 📝 My ToDo
+# Clarity Planner 🧘‍♀️📅  
+From scattered thoughts to structured clarity ✨
 
-A beautifully crafted ToDo web application that helps you organize your life with elegance. Built using **React**, this app features **task sheets**, **calendar integration**, and **dark mode** — all styled with a soft, earthy aesthetic.
-
-## ✨ Features
-
-- 🗂️ **Task Sheets**  
-  Create and manage multiple task sheets with customizable titles, subtitles, and colors.
-
-- ✅ **Task Management**  
-  Add, edit, complete, and delete tasks. Each task supports categories, due dates, subtasks, and memos.
-
-- 📅 **Calendar View**  
-  Visualize your tasks in a drag-and-drop calendar view using FullCalendar.
-
-- 🌓 **Dark Mode**  
-  Toggle between light and dark themes to suit your environment and style.
-
-- 💾 **Local Storage Persistence**  
-  Your data is saved to `localStorage`, so your tasks persist between sessions.
-
-## 🛠️ Tech Stack
-
-- React (Vite)
-- Tailwind CSS
-- FullCalendar
-- Headless UI (dark mode switch)
-- UUID (for unique task IDs)
+Clarity Planner is a gentle, visually calming productivity tool that helps you organize your life with clarity and ease. Create customized sheets, add tasks and subtasks, view everything on a color-coded calendar, and keep track of what matters — your way.
 
 ---
+
+## 🌟 Features
+
+- ✅ Full task + subtask management (check, edit, delete)
+- 📆 Beautiful calendar view with drag-and-drop rescheduling
+- 🧩 Custom Sheets with titles, subtitles, and 10 earth-tone color options
+- 📝 Built-in memos for each task
+- 🌒 Light & Dark Mode toggle
+- 💾 Automatic localStorage saving (no login required)
+- 🧘‍♀️ Smooth UX and minimalist UI
+- 📘 In-app Help section
+
+---
+
+## 🎨 UI Style & Branding
+
+- **Primary Colors**: Soft beige, warm grays, and earthy tones  
+- **Typography**:  
+  - `Cormorant Garamond`: for elegant, serif-style headings  
+  - `Raleway`: for clean, modern body text  
+- **Design Vibe**: Calming, feminine, airy, intuitive  
+- **Icons**: Heroicons & Lucide  
+- **Mood**: Earthy minimalism with cozy, soft accents
+
+---
+
+## 🎯 Target Audience
+
+Clarity Planner is thoughtfully crafted for:
+
+- Women in their 20s–30s  
+- Creatives, students, and neurodivergent thinkers (e.g., ADHD support)  
+- People who crave clarity, calm, and elegance in their planning tools  
+- Those who prefer beauty and softness in their digital tools  
+
+---
+
+## 🛠 Built With
+
+- **React** (functional components & hooks)
+- **Tailwind CSS** (with custom theme and dark mode)
+- **FullCalendar** (`@fullcalendar/react` + plugins)
+- **uuid** (for unique IDs)
+- **Headless UI** (switch toggle)
+- **Heroicons** (icons)
+
+---
+
+
+
