@@ -1,25 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    fontFamily: {
-      raleway: ["Raleway", "sans-serif"],
-      cormorant: ["Cormorant Garamond", "serif"],
-    },
     extend: {
+      fontFamily: {
+        raleway: ['Raleway', 'sans-serif'],
+        cormorant: ['"Cormorant Garamond"', 'serif'],
+      },
       colors: {
-        base: "#F9F5F0",
-        surface: "#EFE7DD",
-        accent: "#8B6F4E",
-        secondary: "#CBAA8A",
-        text: "#4E4035",
-        success: "#A3B18A",
-        warning: "#C86B48",
-        error: "#A15C58",
-        highlight: "#A78C70",
+        soft: {
+          background: "#FAFAFA",
+          text: "#4A4A4A",
+          accent: "#A78E74",      // ミルクティー系
+          border: "#E6E6E6",
+          muted: "#D9D9D9",
+        },
+        dark: {
+          background: "#2F2F2F",
+          text: "#ECECEC",
+          accent: "#A78E74",
+        },
       },
     },
   },
-  darkMode: "class",
+  darkMode: 'class', // クラスでダークモード制御
   plugins: [],
 };

@@ -8,15 +8,18 @@ import interactionPlugin from "@fullcalendar/interaction";
 import multiMonthPlugin from "@fullcalendar/multimonth";
 import { v4 as uuidv4 } from "uuid";
 
-
 export default function CalendarView({ sheets, onUpdateSheet }) {
   const [input, setInput] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [category, setCategory] = useState("General");
+  const [category, setCategory] = useState(sheets[0]?.title || "");
+
 
   const addTask = () => {
-    if (!input.trim() || !sheets[0]) return;
+    if (!input.trim() || !category || !startDate) return;
+  
+    const targetSheet = sheets.find((s) => s.title === category);
+    if (!targetSheet) return;
   
     const newTask = {
       id: uuidv4(),
@@ -25,13 +28,13 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
       date: startDate,
       end: endDate || startDate,
       completed: false,
-      subtasks: [],       // ← 追加
-      memo: "",           // ← 追加
+      subtasks: [],
+      memo: "",
     };
   
     const updatedSheet = {
-      ...sheets[0],
-      tasks: [newTask, ...sheets[0].tasks],
+      ...targetSheet,
+      tasks: [newTask, ...targetSheet.tasks],
     };
   
     onUpdateSheet(updatedSheet);
@@ -42,6 +45,8 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
   
   const toggleTask = (sheetId, taskId) => {
     const sheet = sheets.find((s) => s.id === sheetId);
+    if (!sheet) return;
+
     const updatedSheet = {
       ...sheet,
       tasks: sheet.tasks.map((t) =>
@@ -53,6 +58,8 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
 
   const deleteTask = (sheetId, taskId) => {
     const sheet = sheets.find((s) => s.id === sheetId);
+    if (!sheet) return;
+
     const updatedSheet = {
       ...sheet,
       tasks: sheet.tasks.filter((t) => t.id !== taskId),
@@ -62,6 +69,8 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
 
   const updateTask = (sheetId, updatedTask) => {
     const sheet = sheets.find((s) => s.id === sheetId);
+    if (!sheet) return;
+
     const updatedSheet = {
       ...sheet,
       tasks: sheet.tasks.map((t) =>
@@ -84,6 +93,8 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
     const newEnd = event.endStr || newStart;
 
     const sheet = sheets.find((s) => s.id === sheetId);
+    if (!sheet) return;
+
     const updatedSheet = {
       ...sheet,
       tasks: sheet.tasks.map((task) =>
@@ -117,7 +128,7 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
           setEndDate={setEndDate}
           category={category}
           setCategory={setCategory}
-          categories={["General"]}
+          categories={sheets.map((sheet) => sheet.title)}
           addTask={addTask}
         />
       </div>
@@ -129,6 +140,15 @@ export default function CalendarView({ sheets, onUpdateSheet }) {
           left: "prev,next today",
           center: "title",
           right: "dayGridDay,dayGridWeek,dayGridMonth,multiMonthYear",
+        }}
+        buttonText={{
+          today: "today",
+          month: "month",
+          week: "week",
+          day: "day",
+          Year: "Year",
+          prev: "←",
+          next: "→",
         }}
         views={{
           multiMonthYear: {

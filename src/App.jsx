@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Switch } from "@headlessui/react";
+import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import SheetCard from "./components/SheetCard";
 import AddSheetModal from "./components/AddSheetModal";
 import CalendarView from "./components/CalendarView";
@@ -10,7 +11,7 @@ const defaultSheets = [
     title: "Yoga Routine",
     subtitle: "Morning Flow ☀️",
     memo: "",
-    color: "#A3B18A",
+    color: "#DADADA",
     tasks: [
       {
         id: "t1",
@@ -39,7 +40,7 @@ const defaultSheets = [
     title: "Trip Planning",
     subtitle: "Weekend Getaway",
     memo: "",
-    color: "#C86B48",
+    color: "#BFBFBF",
     tasks: [
       {
         id: "t3",
@@ -65,7 +66,7 @@ const defaultSheets = [
   },
 ];
 
-export default function TodoApp() {
+export default function ClarityPlanner() {
   const [sheets, setSheets] = useState(() => {
     const saved = localStorage.getItem("sheets");
     return saved ? JSON.parse(saved) : defaultSheets;
@@ -76,6 +77,7 @@ export default function TodoApp() {
   );
   const [darkMode, setDarkMode] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("sheets", JSON.stringify(sheets));
@@ -87,6 +89,7 @@ export default function TodoApp() {
 
   const handleCreateSheet = (newSheet) => {
     setSheets([newSheet, ...sheets]);
+    setSelectedSheetIds([newSheet.id, ...selectedSheetIds]); // ← 新規追加を選択中にする
   };
 
   const handleUpdateSheet = (updatedSheet) => {
@@ -142,16 +145,35 @@ export default function TodoApp() {
   );
 
   return (
-    <div className="min-h-screen px-4 py-10 font-raleway bg-[#F9F5F0] text-[#4E4035] dark:bg-[#4E4035] dark:text-[#EFE7DD]">
-      <header className="text-center mb-8">
-        <h1 className="font-cormorant text-4xl font-bold">My Lovely ToDo</h1>
-        <p className="text-[#CBAA8A]">Sheets + Calendar Integrated ✨</p>
+    <div className="min-h-screen px-4 py-10 font-raleway bg-[#FAFAFA] text-[#4A4A4A] dark:bg-[#2F2F2F] dark:text-[#ECECEC]">
+      <header className="text-center mb-8 relative">
+        <h1 className="font-cormorant text-4xl font-bold">Clarity Planner</h1>
+        <p className="text-[#A78E74]">From scattered thoughts to structured clarity ✨</p>
+        <button
+          onClick={() => setShowHelp(!showHelp)}
+          className="absolute top-0 right-0 mt-2 mr-2 text-[#A78E74] hover:text-[#333]"
+          aria-label="Help"
+        >
+          <QuestionMarkCircleIcon className="w-6 h-6" />
+        </button>
       </header>
+
+      {showHelp && (
+        <section className="max-w-xl mx-auto mb-10 text-sm text-center text-[#5C4B3B] dark:text-[#D4CABE] border border-[#D9D9D9] p-4 rounded">
+          <h2 className="text-lg font-semibold mb-2">How to Use</h2>
+          <p className="mb-1">1. Click “+ Add Sheet” to start a new plan.</p>
+          <p className="mb-1">2. Give it a title, subtitle, and pick your favorite color.</p>
+          <p className="mb-1">3. Click on the sheet to view or hide tasks inside.</p>
+          <p className="mb-1">4. Use the calendar below to add, edit, and complete tasks with due dates.</p>
+          <p className="mb-1">5. Switch to Dark Mode anytime for better focus.</p>
+          <p className="mt-2 italic">Your data is automatically saved in your browser.</p>
+        </section>
+      )}
 
       <div className="text-center mb-6">
         <button
           onClick={() => setShowAddModal(true)}
-          className="rounded-full px-4 py-2 border border-[#8B6F4E] hover:bg-[#EFE7DD]"
+          className="rounded-full px-4 py-2 border border-[#A78E74] hover:bg-[#F0F0F0]"
         >
           + Add Sheet
         </button>
@@ -199,7 +221,7 @@ export default function TodoApp() {
             checked={darkMode}
             onChange={setDarkMode}
             className={`${
-              darkMode ? "bg-[#8B6F4E]" : "bg-[#EFE7DD]"
+              darkMode ? "bg-[#A78E74]" : "bg-[#E6E6E6]"
             } relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300`}
           >
             <span
