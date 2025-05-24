@@ -1,25 +1,30 @@
-# todo-app
-📝 My ToDo — Calendar-Based Task Manager
-My Lovely ToDo is a beautifully designed productivity app that combines intuitive to-do sheet management with a powerful calendar view. Built for modern users, especially women in their 20s–30s, the app features a soft, earthy color palette and an elegant, minimalist interface.
+# 📝 My ToDo
 
-✨ Features
-🗂️ Create and customize task sheets with your own titles, subtitles, and colors (10 earthy tones to choose from).
+A beautifully crafted ToDo web application that helps you organize your life with elegance. Built using **React**, this app features **task sheets**, **calendar integration**, and **dark mode** — all styled with a soft, earthy aesthetic.
 
-✅ Add tasks and subtasks, mark them as complete, and receive visual praise for your accomplishments.
+## ✨ Features
 
-📆 Manage tasks in a calendar view with drag-and-drop support and optional start and end dates.
+- 🗂️ **Task Sheets**  
+  Create and manage multiple task sheets with customizable titles, subtitles, and colors.
 
-🧭 Toggle between Month, Year, and Week views for flexible scheduling.
+- ✅ **Task Management**  
+  Add, edit, complete, and delete tasks. Each task supports categories, due dates, subtasks, and memos.
 
-🌙 Built-in Dark Mode switch.
+- 📅 **Calendar View**  
+  Visualize your tasks in a drag-and-drop calendar view using FullCalendar.
 
-💾 Persistent data using localStorage – your tasks are saved even after closing the browser.
+- 🌓 **Dark Mode**  
+  Toggle between light and dark themes to suit your environment and style.
 
-✏️ Edit tasks, subtasks, and sheet names directly.
+- 💾 **Local Storage Persistence**  
+  Your data is saved to `localStorage`, so your tasks persist between sessions.
 
-🧹 Delete tasks, subtasks, and entire sheets with confirmation safety.
+## 🛠️ Tech Stack
 
-🎯 Ideal For
-People who love thoughtful UX, visual clarity, and a planner that feels both personal and powerful. Whether you’re organizing a yoga routine, planning a trip, or managing your week, this app helps you stay calm and on track.
+- React (Vite)
+- Tailwind CSS
+- FullCalendar
+- Headless UI (dark mode switch)
+- UUID (for unique task IDs)
 
-npm run dev
+---
