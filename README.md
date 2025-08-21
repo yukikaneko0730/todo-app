@@ -1,56 +1,57 @@
-# Clarity Planner 🧘‍♀️📅  
-From scattered thoughts to structured clarity ✨
+# Clarity Planner 🧭📅
+From scattered thoughts to structured clarity.
 
-Clarity Planner is a gentle, visually calming productivity tool that helps you organize your life with clarity and ease. Create customized sheets, add tasks and subtasks, view everything on a color-coded calendar, and keep track of what matters — your way.
+Clarity Planner is a calm, gender-neutral planner that helps you turn ideas into action. Create sheets, add tasks and subtasks, see everything on a color-linked calendar, and keep gentle focus on what matters.
 
 ---
 
 ## 🌟 Features
 
-- ✅ Full task + subtask management (check, edit, delete)
-- 📆 Beautiful calendar view with drag-and-drop rescheduling
-- 🧩 Custom Sheets with titles, subtitles, and 10 earth-tone color options
-- 📝 Built-in memos for each task
-- 🌒 Light & Dark Mode toggle
-- 💾 Automatic localStorage saving (no login required)
-- 🧘‍♀️ Smooth UX and minimalist UI
-- 📘 In-app Help section
+- ✅ Tasks & subtasks — check, edit, delete
+- 📆 Calendar view with drag-and-drop rescheduling (FullCalendar)
+- 🗂 Custom sheets (title, subtitle, per-sheet color)
+- 📝 Per-task memo field
+- 🌓 Light / Dark mode toggle
+- 💾 Local auto-save (localStorage) — works offline, no login required
+- 🔐 **Optional** sign-in / sign-up with Firebase Auth (email & password)
+- ❓ In-app Help panel
 
 ---
 
 ## 🎨 UI Style & Branding
 
-- **Primary Colors**: Soft beige, warm grays, and earthy tones  
-- **Typography**:  
-  - `Cormorant Garamond`: for elegant, serif-style headings  
-  - `Raleway`: for clean, modern body text  
-- **Design Vibe**: Calming, feminine, airy, intuitive  
-- **Icons**: Heroicons & Lucide  
-- **Mood**: Earthy minimalism with cozy, soft accents
+- **Palette:** muted neutrals — soft grays with subtle green accents  
+- **Typography:**  
+  - `DM Serif Display` for elegant, calm headings  
+  - `Inter` for clean, readable body text  
+- **Design vibe:** minimal, airy, gender-neutral  
+- **Icons:** Heroicons & Lucide  
+- **Accessibility:** high-contrast states, focus styles, reduced visual noise
 
 ---
 
-## 🎯 Target Audience
+## 🎯 Who it’s for
 
-Clarity Planner is thoughtfully crafted for:
-
-- Women in their 20s–30s  
-- Creatives, students, and neurodivergent thinkers (e.g., ADHD support)  
-- People who crave clarity, calm, and elegance in their planning tools  
-- Those who prefer beauty and softness in their digital tools  
+- Anyone who prefers a quiet, neutral interface
+- Creatives, students, and neurodivergent thinkers who benefit from structure
+- People who want beauty without distraction in their planning tools
 
 ---
 
-## 🛠 Built With
+## 🛠 Tech Stack
 
-- **React** (functional components & hooks)
-- **Tailwind CSS** (with custom theme and dark mode)
+- **React** (hooks)
+- **Tailwind CSS** (custom tokens & dark mode)
 - **FullCalendar** (`@fullcalendar/react` + plugins)
-- **uuid** (for unique IDs)
-- **Headless UI** (switch toggle)
-- **Heroicons** (icons)
+- **uuid** (stable IDs)
+- **Headless UI** (switch)
+- **Heroicons / Lucide** (icons)
+- **Firebase Auth** (optional login)
 
 ---
 
+## 🚀 Quick Start
 
-
+```bash
+pnpm i   # or: npm i / yarn
+pnpm dev # http://localhost:5173
