@@ -1,4 +1,4 @@
-//TaskForm.jsx
+// src/components/TaskForm.jsx
 import React from "react";
 
 export default function TaskForm({
@@ -10,38 +10,47 @@ export default function TaskForm({
   setEndDate,
   category,
   setCategory,
-  categories,
+  categories = [],
   addTask,
 }) {
+  const onSubmit = (e) => {
+    e.preventDefault();
+    addTask();
+  };
+
   return (
-    <div className="bg-white dark:bg-[#6C584C] rounded-xl p-4 mb-4 shadow">
+    <form onSubmit={onSubmit} className="cp-toolbar rounded-xl mb-4 shadow-none">
       <div className="flex flex-col md:flex-row gap-3">
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter a task..."
-          className="flex-1 p-2 rounded border"
+          placeholder="Enter Task"
+          className="cp-input flex-1 min-w-[220px]"
+          aria-label="Task title"
         />
 
         <input
           type="date"
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
-          className="p-2 rounded border"
+          className="cp-input w-[160px]"
+          aria-label="Start date"
         />
 
         <input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="p-2 rounded border"
+          className="cp-input w-[160px]"
+          aria-label="End date"
         />
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="p-2 rounded border"
+          className="cp-select w-[160px]"
+          aria-label="Sheet"
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>
@@ -50,13 +59,11 @@ export default function TaskForm({
           ))}
         </select>
 
-        <button
-          onClick={addTask}
-          className="bg-[#8B6F4E] text-white px-4 py-2 rounded hover:bg-[#A78C70]"
-        >
+        
+        <button type="submit" className="cp-btn-gray">
           Add
         </button>
       </div>
-    </div>
+    </form>
   );
 }

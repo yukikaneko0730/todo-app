@@ -1,9 +1,11 @@
+// src/App.jsx
 import { useState, useEffect } from "react";
 import { Switch } from "@headlessui/react";
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import SheetCard from "./components/SheetCard";
 import AddSheetModal from "./components/AddSheetModal";
 import CalendarView from "./components/CalendarView";
+import { useAuth } from "./contexts/AuthContext";
 
 const defaultSheets = [
   {
@@ -79,6 +81,8 @@ export default function ClarityPlanner() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
+  const { logout } = useAuth();
+
   useEffect(() => {
     localStorage.setItem("sheets", JSON.stringify(sheets));
   }, [sheets]);
@@ -89,7 +93,7 @@ export default function ClarityPlanner() {
 
   const handleCreateSheet = (newSheet) => {
     setSheets([newSheet, ...sheets]);
-    setSelectedSheetIds([newSheet.id, ...selectedSheetIds]); // ← 新規追加を選択中にする
+    setSelectedSheetIds([newSheet.id, ...selectedSheetIds]);
   };
 
   const handleUpdateSheet = (updatedSheet) => {
@@ -145,21 +149,36 @@ export default function ClarityPlanner() {
   );
 
   return (
-    <div className="min-h-screen px-4 py-10 font-raleway bg-[#FAFAFA] text-[#4A4A4A] dark:bg-[#2F2F2F] dark:text-[#ECECEC]">
+    <div className="min-h-screen px-4 py-10 bg-[var(--bg)] text-[var(--text)] dark:bg-[var(--bg-dark)] dark:text-[var(--text-dark)]">
       <header className="text-center mb-8 relative">
-        <h1 className="font-cormorant text-4xl font-bold">Clarity Planner</h1>
-        <p className="text-[#A78E74]">From scattered thoughts to structured clarity ✨</p>
-        <button
-          onClick={() => setShowHelp(!showHelp)}
-          className="absolute top-0 right-0 mt-2 mr-2 text-[#A78E74] hover:text-[#333]"
-          aria-label="Help"
-        >
-          <QuestionMarkCircleIcon className="w-6 h-6" />
-        </button>
+        <h1 className="text-4xl font-bold">Clarity Planner</h1>
+        <p className="text-[var(--text-muted)]">
+          From scattered thoughts to structured clarity ✨
+        </p>
+
+        {/* Right-top: Help & Logout */}
+        <div className="absolute top-0 right-0 flex gap-3 mt-2 mr-2">
+          <button
+            onClick={() => setShowHelp(!showHelp)}
+            className="cp-icon-gray"
+            aria-label="Help"
+            title="Help"
+          >
+            <QuestionMarkCircleIcon className="w-6 h-6" />
+          </button>
+          <button
+            onClick={logout}
+            className="cp-ghost-gray px-3 py-1 rounded"
+            aria-label="Logout"
+            title="Logout"
+          >
+            Logout
+          </button>
+        </div>
       </header>
 
       {showHelp && (
-        <section className="max-w-xl mx-auto mb-10 text-sm text-center text-[#5C4B3B] dark:text-[#D4CABE] border border-[#D9D9D9] p-4 rounded">
+        <section className="max-w-xl mx-auto mb-10 text-sm text-center text-[var(--text-muted)] dark:text-[var(--text-dark-muted)] border border-[var(--line)] dark:border-[var(--line-dark)] p-4 rounded">
           <h2 className="text-lg font-semibold mb-2">How to Use</h2>
           <p className="mb-1">1. Click “+ Add Sheet” to start a new plan.</p>
           <p className="mb-1">2. Give it a title, subtitle, and pick your favorite color.</p>
@@ -173,7 +192,7 @@ export default function ClarityPlanner() {
       <div className="text-center mb-6">
         <button
           onClick={() => setShowAddModal(true)}
-          className="rounded-full px-4 py-2 border border-[#A78E74] hover:bg-[#F0F0F0]"
+          className="cp-ghost-gray rounded-full px-4 py-2"
         >
           + Add Sheet
         </button>
@@ -221,7 +240,7 @@ export default function ClarityPlanner() {
             checked={darkMode}
             onChange={setDarkMode}
             className={`${
-              darkMode ? "bg-[#A78E74]" : "bg-[#E6E6E6]"
+              darkMode ? "bg-[var(--accent)]" : "bg-[var(--line)]"
             } relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300`}
           >
             <span

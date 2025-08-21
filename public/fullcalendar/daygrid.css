@@ -1,41 +1,42 @@
-.fc-daygrid {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .fc-daygrid-day-frame {
-    min-height: 4em;
-    position: relative;
-  }
-  
-  .fc-daygrid-day-top {
-    padding: 2px;
-    text-align: right;
-  }
-  
-  .fc-daygrid-event {
-    margin: 1px 2px;
-    padding: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .fc-daygrid-block-event {
-    display: block;
-  }
-  
-  .fc-daygrid-dot-event {
-    display: flex;
-    align-items: center;
-  }
-  
-  .fc-daygrid-event-dot {
-    width: 8px;
-    height: 8px;
-    background: currentColor;
-    border-radius: 50%;
-    margin-right: 5px;
-    flex-shrink: 0;
-  }
-  
+/* daygrid.css — use neutral spacing, inherit fonts/colors */
+.fc-daygrid{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.fc-daygrid-day-frame{
+  min-height: 4.25em;
+  position: relative;
+}
+
+.fc-daygrid-day-top{
+  padding: 6px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fc-daygrid-event{
+  margin: 2px 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: .375rem;
+}
+
+.fc-daygrid-block-event{ display: block; }
+
+.fc-daygrid-dot-event{
+  display: flex;
+  align-items: center;
+}
+
+.fc-daygrid-event-dot{
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
+}

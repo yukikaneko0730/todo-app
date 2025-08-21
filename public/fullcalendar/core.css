@@ -1,80 +1,77 @@
-.fc {
-    direction: ltr;
-    text-align: left;
-  }
-  
-  .fc,
-  .fc-theme-standard {
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 1em;
-  }
-  
-  .fc-scrollgrid,
-  .fc-scrollgrid-section,
-  .fc-col-header,
-  .fc-daygrid,
-  .fc-theme-standard .fc-scrollgrid {
-    border: 1px solid #ddd;
-  }
-  
-  .fc-scrollgrid {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .fc-scrollgrid-section > * {
-    border-top: 1px solid #ddd;
-  }
-  
-  .fc-theme-standard td,
-  .fc-theme-standard th {
-    padding: 0.5em;
-  }
-  
-  .fc-daygrid-day-top {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .fc .fc-toolbar {
-    display: flex;
-    justify-content: space-between;
-    margin: 1em 0;
-  }
-  
-  .fc-toolbar-title {
-    font-size: 1.75em;
-    margin: 0;
-  }
-  
-  .fc-button {
-    background: #eee;
-    border: 1px solid #ddd;
-    padding: 0.5em 1em;
-    cursor: pointer;
-  }
-  
-  .fc-button:hover {
-    background: #ddd;
-  }
-  
-  .fc-button-primary {
-    background: #007bff;
-    border-color: #007bff;
-    color: #fff;
-  }
-  
-  .fc-button-primary:hover {
-    background: #0069d9;
-    border-color: #0062cc;
-  }
-  
-  .fc-event {
-    padding: 2px 4px;
-    font-size: 0.85em;
-    background-color: #3788d8;
-    border: 1px solid #3788d8;
-    color: white;
-    border-radius: 3px;
-  }
-  
+/* core.css — neutral, variable-driven */
+.fc{ direction:ltr; text-align:left; }
+
+/* inherit fonts from index.css */
+.fc, .fc-theme-standard{
+  font-family: inherit;
+  font-size: 1em;
+}
+
+/* borders */
+.fc-scrollgrid,
+.fc-scrollgrid-section,
+.fc-col-header,
+.fc-daygrid,
+.fc-theme-standard .fc-scrollgrid{
+  border: 1px solid var(--line);
+}
+
+.fc-scrollgrid{ border-collapse: collapse; width:100%; }
+.fc-scrollgrid-section > *{ border-top: 1px solid var(--line); }
+
+.fc-theme-standard td,
+.fc-theme-standard th{
+  padding: .6em;
+}
+
+/* toolbar */
+.fc .fc-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin: .75em 0 1em;
+}
+
+.fc-toolbar-title{
+  font-size: 1.6em;
+  margin: 0;
+}
+
+/* fallback button style (overridden in index.css but kept as guard) */
+.fc-button{
+  background: var(--btn);
+  border: none;
+  color: #fff;
+  padding: .5em 1em;
+  cursor: pointer;
+  border-radius: .5rem;
+}
+.fc-button:hover{ background: var(--btn-hover); }
+
+/* primary (active view) */
+.fc-button-primary{
+  background: var(--btn-active);
+  border-color: transparent;
+  color:#fff;
+}
+.fc-button-primary:hover{
+  background: var(--btn-active);
+}
+
+/* event default */
+.fc-event{
+  padding: 2px 6px;
+  font-size: .85em;
+  background: var(--event-bg);
+  border: 1px solid var(--accent);
+  color: #2E3B36;
+  border-radius: .375rem;
+}
+
+/* ==== dark ==== */
+.dark .fc-theme-standard .fc-scrollgrid,
+.dark .fc-scrollgrid-section > *,
+.dark .fc-col-header,
+.dark .fc-daygrid{
+  border-color: var(--line-dark);
+}
